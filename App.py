@@ -4,19 +4,17 @@ from datetime import datetime
 from io import BytesIO
 
 import streamlit as st
-from dotenv import load_dotenv
 from openai import OpenAI
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.units import cm
 
-
 # =========================
 # APP CONFIG
 # =========================
 
-load_dotenv()
+
 
 st.set_page_config(
     page_title="Optimum | AI Negotiation Coach",
@@ -24,7 +22,7 @@ st.set_page_config(
     layout="wide"
 )
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
 MODEL_NAME = "gpt-4.1-mini"
 
 if OPENAI_API_KEY:
